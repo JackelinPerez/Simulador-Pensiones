@@ -1,0 +1,44 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+    <div class="form-group">
+      <label for="contribution">
+        Aporte Mensual (S/.)
+      </label>
+      <input id="contribution" type="number" formControlName="contribution" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="contributionmounths">
+        N° meses aportados:
+      </label>
+      <input id="contributionmounths" type="number" formControlName="contributionmounths" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="rate">
+        Tasa Anual %:
+      </label>
+      <input id="rate" type="number" formControlName="rate" class="form-control">
+    </div>        
+
+    <div class="form-group">
+      <label for="withdrawal">
+        Monto a retirar %:
+      </label>
+      <input id="withdrawal" type="number" formControlName="withdrawal" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="lifeYears">
+        Años de vida restantes: 
+      </label>
+      <input id="lifeYears" type="number" formControlName="lifeYears" class="form-control">
+    </div>
+
+    <button class="button btn btn-outline-info" type="submit" >Guardar</button>
+    <!--por mientras-->
+    <div>
+      <label class="text-info" *ngIf="disburse">Monto a Desembolsar:   S/ {{disburse}}</label><br>
+      <label class="text-info" *ngIf="monthlyPension">Pension en 10 años de vida:   S/ {{monthlyPension}}</label>  
+    </div>  
+</form>
