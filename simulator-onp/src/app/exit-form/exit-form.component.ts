@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SimulatorService} from '../services/simulator.service';
 
 @Component({
   selector: 'app-exit-form',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExitFormComponent implements OnInit {
 
-  constructor() { }
+  itemss;
+  constructor(
+    private simulatorService: SimulatorService
+  ) { }
 
   ngOnInit() {
+    this.itemss = this.simulatorService.getItems();
+    console.log('Meses aportados:'+Object.keys(this.itemss));
   }
 
 }

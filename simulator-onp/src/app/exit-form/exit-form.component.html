@@ -1,1 +1,6 @@
-<p>exit-form works!</p>
+<!--por mientras-->
+<div>
+    <label class="text-info" *ngIf="disburse">Monto a Desembolsar:   S/ {{disburse}}</label><br>
+    <label class="text-info" *ngIf="monthlyPension">Pension en 10 años de vida:   S/ {{monthlyPension}}</label>  
+    <button class="button btn btn-outline-info mx-auto" type="submit" routerLink="/resultado">Volver</button>
+</div>

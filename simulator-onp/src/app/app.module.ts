@@ -8,6 +8,19 @@ import { ExitFormComponent } from './exit-form/exit-form.component';
 //incluyendo formulario
 import { ReactiveFormsModule } from '@angular/forms';
 
+//incluyendo routher
+import { RouterModule, Routes } from '@angular/router';
+
+//servicios
+import {SimulatorService} from './services/simulator.service';
+
+const appRoutes: Routes = [
+  {path:'resultado', component:ExitFormComponent},
+  {path:'formulario', component:EntryFormComponent},
+  {path:'', component:EntryFormComponent},
+  { path: '',   redirectTo: '/formulario', pathMatch: 'full' },
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,9 +29,12 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    SimulatorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
