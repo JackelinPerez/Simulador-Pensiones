@@ -1,1 +1,15 @@
-<p>exit-form works!</p>
+<div class="result d-flex flex-column justify-content-center">
+    <div class="row justify-content-center" *ngIf="disburse">
+        <label class="text-info">Monto a Desembolsar:   S/ {{disburse}}</label>
+    </div>
+        
+    <div class="row justify-content-center" *ngIf="monthlyPension">
+        <label class="text-info">Pension en 10 años de vida:   S/ {{monthlyPension}}</label>  
+    </div>
+
+    <div class="media-figure row justify-content-center" *ngIf="statusPensionsResult">
+        <img [src]="statusPensionsResult.img" style="height:300px ;width:250px ">
+    </div>
+
+    <button class="button btn btn-outline-info mx-auto" (click)="onSubmit()">Volver</button>
+</div>
