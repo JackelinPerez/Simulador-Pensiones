@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
 
 //Observables
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SimulatorService {
-  items = [];
-  private items$ = new Subject<SimulatorService[]>();
-  constructor() { }
+  private formSave = new BehaviorSubject({});
+  public currentForm = this.formSave.asObservable();
 
-  addItem(product:SimulatorService) {
-    this.items.push(product);
-    this.items$.next(this.items);
+  constructor() {};
+
+  changeMenu(value: any){
+    this.formSave.next(value);
   }
-
-  getItems() {
-    return this.items;
-  }  
 }
