@@ -1,15 +1,25 @@
-<div class="result d-flex flex-column justify-content-center">
-    <div class="row justify-content-center" *ngIf="disburse">
-        <label class="text-info">Monto a Desembolsar:   S/ {{disburse}}</label>
-    </div>
-        
-    <div class="row justify-content-center" *ngIf="monthlyPension">
-        <label class="text-info">Pension en 10 años de vida:   S/ {{monthlyPension}}</label>  
+<div class="d-flex flex-column mx-auto">
+
+    <article class="result d-flex flex-column border border-dark rounded mx-auto text-info">
+        <h1 class="result1 text-dark justify-content-center text-center">Resultado</h1>
+        <P><strong>Aporte mensual:      </strong>S/ {{statusResolved.contribution}}</P>
+        <p><strong>Meses aportados:     </strong>{{statusResolved.contributionmounths}}</p>
+        <P><strong>Monto disponible:    </strong>S/ {{statusResolved.disburse}}</P>
+        <p><strong>Monto recaudado:     </strong>S/ {{statusResolved.amountCollected}}</p>
+        <p><strong>Pension en 10 años de vida: </strong>S/ {{statusResolved.monthlyPension}}</p>
+    </article>
+
+    <div class="justify-content-center mx-auto" *ngIf="statusPensionsResult">
+        <h1 class="text-danger mx-auto text-center"><strong>{{statusPensionsResult.message}}</strong></h1>
+        <img [src]="statusPensionsResult.img" class="border border-dark rounded" style="height:200px ;width:200px">
     </div>
 
-    <div class="media-figure row justify-content-center" *ngIf="statusPensionsResult">
-        <img [src]="statusPensionsResult.img" style="height:300px ;width:250px ">
-    </div>
+    <article class="leyenda d-flex flex-column border border-dark rounded  mx-auto text-success">
+        <h3 class="text-dark justify-content-center text-center">NOTA:</h3>
+        <p><strong>TEA: </strong> 3.5%</p>
+        <p><strong>Retiro: </strong> 50% del fondo total</p>
+        <p>Promedio de <strong>10 años</strong> pensionados</p>
+    </article>
 
     <button class="button btn btn-outline-info mx-auto" (click)="onSubmit()">Volver</button>
 </div>

@@ -5,7 +5,7 @@ import { SimulatorService} from '../services/simulator.service';
 import { Router, Resolve } from '@angular/router';
 
 //incluyendo clases
-import {Status} from '../models/status';
+import {Status, StatusResolved} from '../models/status';
 
 @Component({
   selector: 'app-exit-form',
@@ -14,18 +14,22 @@ import {Status} from '../models/status';
 })
 export class ExitFormComponent implements OnInit {
 
-  disburse: any = 0;
-  monthlyPension: any = 0;
-  statusPensions: Status[] = [
-    {contribution: 100,
-    img: 'assets/img/sad.png'},
-    {contribution: 300,
-    img: 'assets/img/ok.png'},
-    {contribution: 600,
-    img: 'assets/img/winner.png'},
-  ];
-
+  statusResolved: StatusResolved = {
+    disburse: 0,
+    amountCollected: 0,
+    monthlyPension: 0,
+    contribution:0,
+    contributionmounths: 0
+  };
   statusPensionsResult: Status;
+  statusPensions: Status[] = [
+    {message: 'Ayuda!',
+    img: 'assets/img/cry.gif'},
+    {message: 'Sobreviviras!',
+    img: 'assets/img/good.gif'},
+    {message: 'Provechito!',
+    img: 'assets/img/winner.gif'},
+  ];
 
   constructor(
     private simulatorService: SimulatorService,
@@ -34,21 +38,22 @@ export class ExitFormComponent implements OnInit {
 
   ngOnInit() {
     this.simulatorService.currentForm.subscribe((result: any)=>{
-    const contribution = parseFloat(result.contribution);
-    const contributionmounths = parseFloat(result.contributionmounths);
-    const rate = parseFloat(result.rate)/12;
-    const withdrawal = parseFloat (result.withdrawal);
-    const lifeYears = parseFloat(result.lifeYears);
-    this.disburse = ((withdrawal/100)*contribution*((Math.pow((1+(rate/100)),contributionmounths+1)-1)/(rate/100)-1)).toFixed(2);
-    this.monthlyPension = (((1-(withdrawal/100))*contribution*((Math.pow((1+(rate/100)),contributionmounths+1)-1)/(rate/100)-1))/(lifeYears*12)).toFixed(2);
-    this.statusPensionsResult = this.statusPension(contribution);
+    this.statusResolved.contribution = parseFloat(result.contribution);
+    this.statusResolved.contributionmounths = parseFloat(result.contributionmounths);
+    const rate = 3.5/1200;//tasa efectiva de 5% anual
+    const withdrawal = 50/100;//50% porcentaje a retirar
+    const lifeYears = 10*12;//10 años de aporte
+    this.statusResolved.amountCollected = parseFloat((this.statusResolved.contribution*((Math.pow((1+(rate)),this.statusResolved.contributionmounths+1)-1)/(rate)-1)).toFixed(2));
+    this.statusResolved.disburse = parseFloat(((withdrawal)*this.statusResolved.amountCollected).toFixed(2));
+    this.statusResolved.monthlyPension = parseFloat((((1-(withdrawal))*this.statusResolved.contribution*((Math.pow((1+(rate)),this.statusResolved.contributionmounths+1)-1)/(rate)-1))/(lifeYears)).toFixed(2));
+    this.statusPensionsResult = this.statusPension(this.statusResolved.monthlyPension);
     })
   }
 
-  statusPension(contribution:any){
-    let result:Status ={contribution:0, img:''};
-    if(contribution<250) result = this.statusPensions[0];
-    else if (contribution<600 && contribution>=250) result = this.statusPensions[1];
+  statusPension(totalAcum:number){
+    let result:Status ={message:'', img:''};
+    if(totalAcum<200) result = this.statusPensions[0];
+    else if (totalAcum<400 && totalAcum>=200) result = this.statusPensions[1];
     else result = this.statusPensions[2];
     return result;
   }

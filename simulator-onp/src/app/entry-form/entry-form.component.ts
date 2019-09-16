@@ -24,7 +24,7 @@ export class EntryFormComponent implements OnInit {
     contributionmounths: '',
     rate: '',
     withdrawal: '',
-    lifeYears: ''
+    lifeYears: '',
   }
   constructor(private formBuilder: FormBuilder, private simulatorService:SimulatorService,private router: Router) {
     this.checkoutForm = this.formBuilder.group(this.compare);
@@ -40,6 +40,7 @@ export class EntryFormComponent implements OnInit {
     else {
       this.simulatorService.changeMenu(customerData);
       this.router.navigateByUrl('/resultado');
+      this.checkoutForm.reset();
     }
   }
 }

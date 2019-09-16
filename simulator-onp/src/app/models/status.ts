@@ -1,4 +1,11 @@
 export class Status {
-    contribution: number;
+    message: string;
     img: string;
+}
+export class StatusResolved {
+    disburse: number;
+    amountCollected: number;
+    monthlyPension: number;
+    contribution: number;
+    contributionmounths: number;
 }

@@ -1,7 +1,13 @@
 .result{
-    padding: 10%;
+    padding: 0% 3%;
+    margin: 3%;
 }
 
-.button{
-    margin: 3%;
+.leyenda{
+    margin:  5%;
+    padding: 2%;
+}
+
+.result1{
+    margin: 10% 0%;
 }
