@@ -61,8 +61,8 @@ export class ExitFormComponent implements OnInit {
 
   calculatePension(outputForm: StatusResolved){
     const rate = 3.5/1200;//tasa efectiva de 5% anual
-    const withdrawal = 50/100;//50% porcentaje a retirar
-    const lifeYears = 10*12;//10 años de aporte
+    const withdrawal = 30/100;//30% porcentaje a retirar
+    const lifeYears = 10*12;//10 años de pension
     this.statusResolved.contribution = outputForm.contribution;
     this.statusResolved.contributionmounths = outputForm.contributionmounths;
     this.statusResolved.amountCollected = (this.statusResolved.contribution*((Math.pow((1+(rate)),this.statusResolved.contributionmounths+1)-1)/(rate)-1));
@@ -76,7 +76,8 @@ export class ExitFormComponent implements OnInit {
     let objNumberAux: StatusResolved = {...objNumber};
     let statusOK:StatusResolvedString ={...this.statusResolvedString};
     Object.keys(objNumberAux).forEach(ele => {
-      statusOK[ele] = objNumberAux[ele].toLocaleString('de-PEN');
+      // statusOK[ele] = objNumberAux[ele].toLocaleString('de-PEN');
+      statusOK[ele] = objNumberAux[ele].toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     });
     return statusOK;
   }
