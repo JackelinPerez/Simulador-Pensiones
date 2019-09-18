@@ -1,3 +1,6 @@
+*{
+    border-radius: 30px;
+}
 .result{
     padding: 0% 3%;
     margin: 3%;
@@ -10,4 +13,12 @@
 
 .result1{
     margin: 10% 0%;
+}
+
+.text-output{
+    background: grey;
+}
+
+.button{
+    margin: 2%;
 }

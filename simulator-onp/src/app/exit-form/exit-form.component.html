@@ -1,25 +1,27 @@
 <div class="d-flex flex-column mx-auto">
 
-    <article class="result d-flex flex-column border border-dark rounded mx-auto text-info">
+    <article class="result d-flex flex-column border border-info mx-auto btn-outline-info">
         <h1 class="result1 text-dark justify-content-center text-center">Resultado</h1>
-        <P><strong>Aporte mensual:      </strong>S/ {{statusResolved.contribution}}</P>
-        <p><strong>Meses aportados:     </strong>{{statusResolved.contributionmounths}}</p>
-        <P><strong>Monto disponible:    </strong>S/ {{statusResolved.disburse}}</P>
-        <p><strong>Monto recaudado:     </strong>S/ {{statusResolved.amountCollected}}</p>
-        <p><strong>Pension en 10 años de vida: </strong>S/ {{statusResolved.monthlyPension}}</p>
+        <P><strong>Aporte mensual:      </strong>S/ {{statusResolvedString.contribution}}</P>
+        <p><strong>Meses aportados:     </strong>{{statusResolvedString.contributionmounths}}</p>
+        <p><strong>Interes ganado, 3.5% anual:     </strong>S/ {{statusResolvedString.interest}}</p>        
+        <p><strong>Monto recaudado:     </strong>S/ {{statusResolvedString.amountCollected}}</p>
+        <P><strong>Monto disponible, 50% del total:    </strong>S/ {{statusResolvedString.disburse}}</P>
+        <p><strong>Pension en 10 años de vida Sin retiro anticipado: </strong>S/ {{statusResolvedString.monthlyPensionr}}</p>
+        <p><strong>Pension en 10 años de vida con retiro anticipado: <label class="text-output border border-white rounded mx-auto text-white">S/ {{statusResolvedString.monthlyPension}}</label></strong></p>
     </article>
 
     <div class="justify-content-center mx-auto" *ngIf="statusPensionsResult">
         <h1 class="text-danger mx-auto text-center"><strong>{{statusPensionsResult.message}}</strong></h1>
-        <img [src]="statusPensionsResult.img" class="border border-dark rounded" style="height:200px ;width:200px">
+        <img [src]="statusPensionsResult.img" class="border border-dark" style="height:200px ;width:200px">
     </div>
 
-    <article class="leyenda d-flex flex-column border border-dark rounded  mx-auto text-success">
+    <!-- <article class="leyenda d-flex flex-column border border-dark rounded  mx-auto text-success">
         <h3 class="text-dark justify-content-center text-center">NOTA:</h3>
         <p><strong>TEA: </strong> 3.5%</p>
         <p><strong>Retiro: </strong> 50% del fondo total</p>
         <p>Promedio de <strong>10 años</strong> pensionados</p>
-    </article>
+    </article> -->
 
-    <button class="button btn btn-outline-info mx-auto" (click)="onSubmit()">Volver</button>
+    <button class="button btn btn-outline-info mx-auto rounded" (click)="onSubmit()">Volver</button>
 </div>
