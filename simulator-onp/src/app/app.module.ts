@@ -25,7 +25,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EntryFormComponent,
-    ExitFormComponent
+    ExitFormComponent,
   ],
   imports: [
     BrowserModule,

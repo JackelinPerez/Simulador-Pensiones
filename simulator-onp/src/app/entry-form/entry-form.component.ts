@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SimulatorService} from '../services/simulator.service'
 //incluyendo clases
 import { Form} from '../models/form';
+import { Table} from '../models/table';
 
 @Component({
   selector: 'app-entry-form',
@@ -19,6 +20,7 @@ export class EntryFormComponent implements OnInit {
   disburse;
   monthlyPension;
 
+  formInputs: Table []= [];
   compare : Form = {
     contribution : '',
     contributionmounths: '',
@@ -26,6 +28,12 @@ export class EntryFormComponent implements OnInit {
     withdrawal: '',
     lifeYears: '',
   }
+
+  total: any = {
+      contribution: 0,
+      contributionMounths:0  
+  }
+
   constructor(private formBuilder: FormBuilder, private simulatorService:SimulatorService,private router: Router) {
     this.checkoutForm = this.formBuilder.group(this.compare);
    }
@@ -34,11 +42,25 @@ export class EntryFormComponent implements OnInit {
   }
   
   onSubmit(customerData:any) {
-    if(customerData == this.compare){
+    this.formInputs.push(customerData);
+    this.total = this.formInputs.map((ele:Table)=>{
+      return {
+        contribution: parseInt(ele.contribution),
+        contributionmounths: parseInt(ele.contributionmounths)
+      }
+    }).reduce((acum,eleR)=>{
+      acum.contribution += eleR.contribution;
+      acum.contributionMounths += eleR.contributionmounths;
+      return acum;
+    },{contribution: 0, contributionMounths:0});
+  }
+
+  calculate(){
+    if(!this.formInputs){
       alert('Algun campo No ha llenado')
     }
     else {
-      this.simulatorService.changeMenu(customerData);
+      this.simulatorService.changeMenu(this.formInputs);
       this.router.navigateByUrl('/resultado');
       this.checkoutForm.reset();
     }

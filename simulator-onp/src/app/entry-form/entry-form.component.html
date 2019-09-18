@@ -6,18 +6,37 @@
     </div>
 
     <div class="form-group mx-auto">
-      <label for="contribution">
-        Aporte Mensual (S/.)
-      </label>
-      <input id="contribution" type="number" formControlName="contribution" class="form-control">
+      <input id="contribution" type="number" formControlName="contribution" class="form-control" placeholder="Aporte Mensual (S/.)">
     </div>
   
     <div class="form-group mx-auto">
-      <label for="contributionmounths">
-        N° meses aportados:
-      </label>
-      <input id="contributionmounths" type="number" formControlName="contributionmounths" class="form-control">
+      <input id="contributionmounths" type="number" formControlName="contributionmounths" class="form-control" placeholder="N° meses aportados:">
     </div>
-    
-    <button class="button btn btn-outline-info mx-auto rounded" type="submit">Calcular</button>
+
+    <button class="button btn btn-outline-info mx-auto rounded" type="submit">Seguir aportando</button>  
 </form>
+
+<div class="mx-auto justify-content-center text-center" *ngIf="formInputs[0]">
+  <table class="table table-bordered table-hover table-dark">
+    <thead>
+      <th>N°</th>
+      <th>Aporte Mensual (S/.)</th>
+      <th>N° meses aportados</th>
+    </thead>
+    <tbody>
+      <tr class="table-info text-dark" *ngFor="let formInput of formInputs; let indice=index">
+        <td>{{indice+1}}</td>
+        <td>{{formInput.contribution}}</td>
+        <td>{{formInput.contributionmounths}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <th>S/ {{total.contribution}}</th>
+        <th>{{total.contributionMounths}}</th>
+      </tr>
+    </tfoot>
+  </table>
+  <button class="button btn btn-outline-info mx-auto rounded" (click)="calculate()">Calcular</button>
+</div>
