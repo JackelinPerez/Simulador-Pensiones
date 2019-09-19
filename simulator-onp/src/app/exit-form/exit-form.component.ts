@@ -64,12 +64,14 @@ export class ExitFormComponent implements OnInit {
     const withdrawal = 30/100;//30% porcentaje a retirar
     const lifeYears = 10*12;//10 años de pension
     this.statusResolved.contribution = outputForm.contribution;
-    this.statusResolved.contributionmounths = outputForm.contributionmounths;
+    this.statusResolved.contributionmounths = outputForm.contributionmounths*12;
     this.statusResolved.amountCollected = (this.statusResolved.contribution*((Math.pow((1+(rate)),this.statusResolved.contributionmounths+1)-1)/(rate)-1));
     this.statusResolved.disburse = ((withdrawal)*this.statusResolved.amountCollected);
     this.statusResolved.monthlyPension = (((1-(withdrawal))*this.statusResolved.amountCollected)/(lifeYears));
     this.statusResolved.monthlyPensionr = (((1-(0))*this.statusResolved.amountCollected)/(lifeYears));
     this.statusResolved.interest = (this.statusResolved.amountCollected - this.statusResolved.contribution*this.statusResolved.contributionmounths);
+    this.statusResolved.contributionmounths = outputForm.contributionmounths;
+    this.statusResolved.contribution = outputForm.contribution + 121;
     return this.statusResolved;
   }
   convertionTostring(objNumber: StatusResolved){

@@ -5,3 +5,8 @@ export class Form {
     withdrawal: string;
     lifeYears: string;
 }
+
+export class FormExit {
+    contribution: number;
+    contributionmounths: number;    
+}
