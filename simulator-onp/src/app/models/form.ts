@@ -1,6 +1,6 @@
 export class Form {
     contribution: string;
-    contributionmounths: string;
+    contributionYears: string;
     rate: string;
     withdrawal: string;
     lifeYears: string;
@@ -8,5 +8,5 @@ export class Form {
 
 export class FormExit {
     contribution: number;
-    contributionmounths: number;    
+    contributionYears: number;    
 }

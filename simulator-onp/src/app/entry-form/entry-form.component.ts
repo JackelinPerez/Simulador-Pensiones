@@ -20,7 +20,7 @@ export class EntryFormComponent implements OnInit {
   monthlyPension;
   formExit: FormExit ={
     contribution: 0,
-    contributionmounths: 0,   
+    contributionYears: 0,   
 }
   contributionSee = {
     total:0,
@@ -29,7 +29,7 @@ export class EntryFormComponent implements OnInit {
   }
   compare : Form = {
     contribution : '',
-    contributionmounths: '',
+    contributionYears: '',
     rate: '',
     withdrawal: '',
     lifeYears: '',
@@ -66,8 +66,7 @@ export class EntryFormComponent implements OnInit {
   }
 
   onChange(newValue:any){
-    // console.log('valor: '+newValue);
-    this.formExit.contributionmounths = newValue;
+    this.formExit.contributionYears = newValue;
   }
 
   onSubmit(customerData:any) {

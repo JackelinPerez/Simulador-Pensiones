@@ -2,11 +2,14 @@
 
     <article class="result d-flex flex-column border border-info mx-auto btn-outline-info">
         <h1 class="result1 text-dark justify-content-center text-center">Resultado</h1>
-        <P><strong>Aporte mensual:      </strong>S/ {{statusResolvedString.contribution}}</P>
-        <p><strong>Años aportados:     </strong>{{statusResolvedString.contributionmounths}}</p>
+        <P><strong>Aporte mensual:      </strong>S/ {{statusResolvedString.contributionTotal}}</P>
+        <P><strong>Aporte fijo:      </strong>S/ 121</P>
+        <P><strong>Aporte rentable:      </strong>S/ {{statusResolvedString.amountVariable}}</P>
+        <p><strong>Años aportados:     </strong>{{statusResolvedString.contributionYears}}</p>
         <p><strong>Interes ganado, 3.5% anual:     </strong>S/ {{statusResolvedString.interest}}</p>        
-        <p><strong>Total recaudado:     </strong>S/ {{statusResolvedString.amountCollected}}</p>
-        <p *ngIf="statusResolvedString.contributionmounths == '20'"><strong>Pension vitalicia:   </strong>S/ 415</p>
+        <p><strong>Monto a desembolsar:     </strong>S/ {{statusResolvedString.amountCollected}}</p>
+        <p *ngIf="20 > statusResolvedString.contributionYears" class="text-danger"><strong>Te falta {{20-statusResolved.contributionYears}}  años para pensionar</strong></p>
+        <p *ngIf="statusResolved.contributionYears == '20'" class="text-dark"><strong>Pension vitalicia:   </strong>S/ 415</p>
         <!-- <P><strong>Monto disponible, 30% del total:    </strong>S/ {{statusResolvedString.disburse}}</P>
         <p><strong>Pension en 10 años de vida Sin retiro anticipado: </strong>S/ {{statusResolvedString.monthlyPensionr}}</p>
         <p><strong>Pension en 10 años de vida con retiro anticipado: <label class="text-output border border-white rounded mx-auto text-white">S/ {{statusResolvedString.monthlyPension}}</label></strong></p> -->
