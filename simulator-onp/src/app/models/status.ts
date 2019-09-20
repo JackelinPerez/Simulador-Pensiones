@@ -18,6 +18,7 @@ export class StatusResolved {
 export class StatusResolvedString {
     disburse: string;
     amountCollected: string;
+    amountVariable: string;
     monthlyPension: string;
     monthlyPensionr: string;
     contribution: string;

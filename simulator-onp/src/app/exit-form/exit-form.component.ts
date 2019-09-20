@@ -30,6 +30,7 @@ export class ExitFormComponent implements OnInit {
   statusResolvedString: StatusResolvedString = {
     disburse: '',
     amountCollected: '',
+    amountVariable: '',
     monthlyPension: '',
     monthlyPensionr:'',
     contribution:'',
