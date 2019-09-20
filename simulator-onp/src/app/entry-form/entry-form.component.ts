@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SimulatorService} from '../services/simulator.service'
 //incluyendo clases
 import { Form, FormExit} from '../models/form';
+import { Table} from '../models/table';
 
 @Component({
   selector: 'app-entry-form',
@@ -18,6 +19,9 @@ export class EntryFormComponent implements OnInit {
   checkoutForm;
   disburse;
   monthlyPension;
+
+  formInputs: Table []= [];
+  
   formExit: FormExit ={
     contribution: 0,
     contributionYears: 0,   
@@ -33,6 +37,7 @@ export class EntryFormComponent implements OnInit {
     rate: '',
     withdrawal: '',
     lifeYears: '',
+    select:'N° '
   }
 
   contributionYears: Object[] = [
@@ -49,7 +54,7 @@ export class EntryFormComponent implements OnInit {
   ];
   constructor(private formBuilder: FormBuilder, private simulatorService:SimulatorService,private router: Router) {
     this.checkoutForm = this.formBuilder.group(this.compare);
-   }
+  }
 
   ngOnInit() { 
   }
@@ -70,9 +75,27 @@ export class EntryFormComponent implements OnInit {
   }
 
   onSubmit(customerData:any) {
+
     this.contributionSee.total = customerData.contribution;
     this.contributionSee.fixed = 121;
     this.contributionSee.variable = customerData.contribution -121;
     this.formExit.contribution = this.contributionSee.variable;
+
+    this.formInputs.push({
+      // ... this.formExit,
+      contribution: this.formExit.contribution,
+      contributionYears: this.formExit.contributionYears,
+      missingYears: 20- this.formExit.contributionYears
+    });
+
+    this.formExit = this.formInputs.reduce((acum,eleR)=>{
+      acum.contribution += eleR.contribution;
+      acum.contributionYears += eleR.contributionYears;
+      return acum;
+    },{contribution: 0, contributionYears:0});
+
+    this.checkoutForm.reset();
+
+
   }
 }

@@ -4,6 +4,7 @@ export class Form {
     rate: string;
     withdrawal: string;
     lifeYears: string;
+    select: string;
 }
 
 export class FormExit {
