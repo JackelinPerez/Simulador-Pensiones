@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "simulatoronp"
+    "default": "simulatoronp",
+    "simulatoronp": "simulatoronp"
   }
 }
