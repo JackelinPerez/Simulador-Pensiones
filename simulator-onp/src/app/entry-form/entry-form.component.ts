@@ -88,13 +88,13 @@ export class EntryFormComponent implements OnInit {
       missingYears: 20- this.formExit.contributionYears
     });
 
-    this.formExit = this.formInputs.reduce((acum,eleR)=>{
-      acum.contribution += eleR.contribution;
-      acum.contributionYears += eleR.contributionYears;
-      return acum;
-    },{contribution: 0, contributionYears:0});
+    // this.formExit = this.formInputs.reduce((acum,eleR)=>{
+    //   acum.contribution += eleR.contribution;
+    //   acum.contributionYears += eleR.contributionYears;
+    //   return acum;
+    // },{contribution: 0, contributionYears:0});
 
-    this.checkoutForm.reset();
+    // this.checkoutForm.reset();
 
 
   }
