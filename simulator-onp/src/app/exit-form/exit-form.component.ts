@@ -24,6 +24,7 @@ export class ExitFormComponent implements OnInit {
     contributionTotal:'',
     contributionmounths: '',
     contributionYears: '',
+    disbursementYears: '',
     interest: ''    
   };
   statusPensionsResult: Status;

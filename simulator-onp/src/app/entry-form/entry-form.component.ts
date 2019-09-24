@@ -9,6 +9,7 @@ import { SimulatorService} from '../services/simulator.service'
 import { Form, FormExit, FormExitString} from '../models/form';
 import { TableNumber, TableString} from '../models/table';
 
+
 @Component({
   selector: 'app-entry-form',
   templateUrl: './entry-form.component.html',
@@ -25,17 +26,20 @@ export class EntryFormComponent implements OnInit {
   
   formExit: FormExit ={
     contribution: 0,
-    contributionYears: 0,   
+    contributionYears: 0,
+    disbursementYears: 0
   }
 
   formExitTotal: FormExit ={
     contribution: 0,
-    contributionYears: 0,   
+    contributionYears: 0,
+    disbursementYears: 0
   }
 
   formExitTotalString: FormExitString = {
     contribution: '',
-    contributionYears: '',  
+    contributionYears: '',
+    disbursementYears: ''
   }
 
 
@@ -54,17 +58,14 @@ export class EntryFormComponent implements OnInit {
   }
 
   contributionYears: Object[] = [
-     { name: 'predet',
-       value: 'N° ' },
-     { name: 'small',
-       value: 5 },
-     { name: 'medium',
-       value: 10 },
-     { name: 'large',
-       value: 15 },
-     { name: 'extraLarge',
-       value: 20 }
+     { value: 'N° '},
+     { value: 5 },
+     { value: 10 },
+     { value: 15 },
+     { value: 20 }
   ];
+
+
   constructor(private formBuilder: FormBuilder, private simulatorService:SimulatorService,private router: Router) {
     this.checkoutForm = this.formBuilder.group(this.compare);
   }
@@ -83,9 +84,17 @@ export class EntryFormComponent implements OnInit {
     }
   }
 
-  onChange(newValue:any){
+  onChangeYears(newValue:any){
     this.formExit.contributionYears = parseInt(newValue);
+    console.log('Periodos de aportes: '+this.formExit.contributionYears);
+    
   }
+
+  onChangeYearsDisbursement(newValue:any){
+    this.formExit.disbursementYears = parseInt(newValue);
+    console.log('Periodo a desemmbolsar: '+this.formExit.disbursementYears);
+    
+  }  
 
   onSubmit(customerData:any) {
 
@@ -93,6 +102,10 @@ export class EntryFormComponent implements OnInit {
     this.contributionSee.fixed = 121;
     this.contributionSee.variable = customerData.contribution -121;
     this.formExit.contribution = this.contributionSee.variable;
+
+    //pruebita:
+    this.simulatorService.monthlyPension(this.contributionSee.total*0.5);
+    
 
     this.formInputsNumber.push({
       contributionMontly: this.formExit.contribution+121,
@@ -107,6 +120,7 @@ export class EntryFormComponent implements OnInit {
       contributionMontly: (this.formExit.contribution+121).toString(),
       contribution: (this.formExit.contribution).toString(),
       contributionYears: (this.formExit.contributionYears).toString(),
+      disbursementYears: (this.formExit.disbursementYears).toString(),
       interestGained: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).interest,
       missingYears: (20- this.formExit.contributionYears).toString(),
       amountCollected: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).amountCollected
@@ -115,12 +129,14 @@ export class EntryFormComponent implements OnInit {
     this.formExitTotal = this.formInputsNumber.reduce((acum,eleR)=>{
       acum.contribution += eleR.amountCollected;
       acum.contributionYears += eleR.contributionYears;
+      acum.disbursementYears += eleR.disbursementYears;
       return acum;
-    },{contribution: 0, contributionYears:0});
+    },{contribution: 0, contributionYears:0, disbursementYears:0});
 
     this.formExitTotalString = {
       contribution: this.simulatorService.convertionTostring(this.formExitTotal).contribution,
-      contributionYears: this.simulatorService.convertionTostring(this.formExitTotal).contributionYears
+      contributionYears: this.simulatorService.convertionTostring(this.formExitTotal).contributionYears,
+      disbursementYears: this.simulatorService.convertionTostring(this.formExitTotal).disbursementYears
     }
   }
 }

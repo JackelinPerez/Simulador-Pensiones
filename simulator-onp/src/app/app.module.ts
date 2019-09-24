@@ -25,12 +25,12 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EntryFormComponent,
-    ExitFormComponent
+    ExitFormComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     SimulatorService

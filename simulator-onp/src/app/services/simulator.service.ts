@@ -26,6 +26,7 @@ export class SimulatorService {
     contributionTotal:'',
     contributionmounths: '',
     contributionYears: '',
+    disbursementYears: '',
     interest: ''    
   };
 
@@ -47,6 +48,7 @@ export class SimulatorService {
       contributionTotal:0,
       contributionmounths: 0,
       contributionYears: 0,
+      disbursementYears: 0,
       interest: 0
     };
 
@@ -76,4 +78,47 @@ export class SimulatorService {
     });
     return statusOK;
   }
+
+  monthlyPension(fixedPension: number){
+    let promPension:string = '';
+    const contributionPension = [
+      { pensionValue: '500.00'},
+      { pensionValue: '565.50'},
+      { pensionValue: '631.00'},
+      { pensionValue: '696.50'},
+      { pensionValue: '762.00'},
+      { pensionValue: '827.50'},
+      { pensionValue: '893.00'}
+    ]      
+    switch (true) {
+      case ((121 <= fixedPension) && (fixedPension <155)):
+        promPension = contributionPension[0].pensionValue;
+        break;
+      case ((155 <= fixedPension) && (fixedPension <189)):
+        promPension = contributionPension[1].pensionValue;
+        break;  
+      case ((189 <= fixedPension) && (fixedPension <223)):
+        promPension = contributionPension[2].pensionValue;
+        break;
+      case ((223 <= fixedPension) && (fixedPension <257)):
+        promPension = contributionPension[3].pensionValue;        
+        break;
+      case ((257 <= fixedPension) && (fixedPension <291)):
+        promPension = contributionPension[4].pensionValue;   
+        break;
+      case ((291 <= fixedPension) && (fixedPension <325)):
+        promPension = contributionPension[5].pensionValue;               
+        break;
+      case (325 <= fixedPension):
+        promPension = contributionPension[5].pensionValue;               
+        break;             
+      default:
+        promPension = 'No existe pension';           
+        break;
+    }
+    console.log('pension: s/'+promPension);
+    
+    return promPension;
+  }
+
 }

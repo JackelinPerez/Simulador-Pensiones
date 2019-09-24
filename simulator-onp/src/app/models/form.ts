@@ -9,10 +9,12 @@ export class Form {
 
 export class FormExit {
     contribution: number;
-    contributionYears: number;    
+    contributionYears: number;
+    disbursementYears: number;
 }
 
 export class FormExitString {
     contribution: string;
-    contributionYears: string;    
+    contributionYears: string;
+    disbursementYears: string;    
 }
