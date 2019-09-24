@@ -1,6 +1,7 @@
 export class TableNumber {
-    contributionMontly: number;
     contribution: number;
+    contributionFixed: number;
+    contributionMontly: number;
     contributionYears: number;
     disbursementYears: number;
     missingYears: number;
@@ -9,8 +10,9 @@ export class TableNumber {
 }
 
 export class TableString {
-    contributionMontly: string;
     contribution: string;
+    contributionFixed: number;
+    contributionMontly: string;
     contributionYears: string;
     disbursementYears: string;
     missingYears: string;

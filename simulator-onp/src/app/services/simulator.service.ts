@@ -6,6 +6,8 @@ import { BehaviorSubject} from 'rxjs';
 //incluyendo clases
 import {Status, StatusResolved, StatusResolvedString} from '../models/status';
 
+//incluyendo clases
+import { FormExit} from '../models/form';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class SimulatorService {
     monthlyPension: '',
     monthlyPensionr:'',
     contribution:'',
-    contributionTotal:'',
+    contributionFixed:'',
+    contributionMontly:'',
     contributionmounths: '',
     contributionYears: '',
     disbursementYears: '',
@@ -45,7 +48,8 @@ export class SimulatorService {
       monthlyPension: 0,
       monthlyPensionr:0,
       contribution:0,
-      contributionTotal:0,
+      contributionFixed: 0,
+      contributionMontly:0,
       contributionmounths: 0,
       contributionYears: 0,
       disbursementYears: 0,
@@ -60,8 +64,10 @@ export class SimulatorService {
     statusResolved.monthlyPension = (((1-(withdrawal))*statusResolved.amountCollected)/(lifeYears));
     statusResolved.monthlyPensionr = (((1-(0))*statusResolved.amountCollected)/(lifeYears));
     statusResolved.interest = (statusResolved.amountCollected - statusResolved.contribution*statusResolved.contributionmounths);
-    statusResolved.contributionTotal = outputForm.contribution + 121;
+    statusResolved.contributionMontly = outputForm.contributionMontly;
     statusResolved.amountVariable = outputForm.contribution;
+    statusResolved.disbursementYears = outputForm.disbursementYears;
+    statusResolved.contributionFixed = outputForm.contributionFixed;
     return statusResolved;
   }
   
@@ -69,26 +75,55 @@ export class SimulatorService {
     return 20-parseInt(years);
   }
 
+  amountFixedContribution(formInputsRaw: any, formInputsTotal: any){
+    let formExit: FormExit ={
+      contributionMontly:0,
+      contribution: 0,
+      contributionFixed: 0,
+      contributionYears: 0,
+      disbursementYears: 0
+    }
+
+    formExit.contributionMontly = formInputsRaw.contributionMontly;
+    formExit.contributionYears = formInputsRaw.contributionYears;
+    formExit.disbursementYears = formInputsRaw.disbursementYears;
+
+    // if((formInputsRaw.contributionYears <= formInputsTotal.contributionYears) || !formInputsTotal.contributionYears ){
+    if((formInputsTotal.contributionYears < formInputsRaw.disbursementYears) || !formInputsTotal.contributionYears ){
+    formExit.contribution = formInputsRaw.contributionMontly - 121;
+      formExit.contributionFixed = 121;
+    }
+    else{
+      formExit.contribution = formInputsRaw.contributionMontly*0.29;
+      formExit.contributionFixed = formInputsRaw.contributionMontly*0.61; 
+    }
+
+    return formExit;
+  }
+  
   convertionTostring(objNumber: any){
     let objNumberAux: StatusResolved = {...objNumber};
     let statusOK:StatusResolvedString = {...this.statusResolvedString};
     Object.keys(objNumberAux).forEach(ele => {
       // statusOK[ele] = objNumberAux[ele].toLocaleString('de-PEN');
+      // console.log('-------------------------------------');
+      // console.log(ele +': '+objNumberAux[ele]);
+      
       statusOK[ele] = objNumberAux[ele].toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     });
     return statusOK;
   }
 
   monthlyPension(fixedPension: number){
-    let promPension:string = '';
+    let promPension:number = 0;
     const contributionPension = [
-      { pensionValue: '500.00'},
-      { pensionValue: '565.50'},
-      { pensionValue: '631.00'},
-      { pensionValue: '696.50'},
-      { pensionValue: '762.00'},
-      { pensionValue: '827.50'},
-      { pensionValue: '893.00'}
+      { pensionValue: 500.00},
+      { pensionValue: 565.50},
+      { pensionValue: 631.00},
+      { pensionValue: 696.50},
+      { pensionValue: 762.00},
+      { pensionValue: 827.50},
+      { pensionValue: 893.00}
     ]      
     switch (true) {
       case ((121 <= fixedPension) && (fixedPension <155)):
@@ -110,10 +145,10 @@ export class SimulatorService {
         promPension = contributionPension[5].pensionValue;               
         break;
       case (325 <= fixedPension):
-        promPension = contributionPension[5].pensionValue;               
+        promPension = contributionPension[6].pensionValue;               
         break;             
       default:
-        promPension = 'No existe pension';           
+        promPension = 0;           
         break;
     }
     console.log('pension: s/'+promPension);

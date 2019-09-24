@@ -9,7 +9,8 @@ export class StatusResolved {
     monthlyPension: number;
     monthlyPensionr: number;
     contribution: number;
-    contributionTotal: number;
+    contributionFixed: number;
+    contributionMontly: number;
     contributionmounths: number;
     contributionYears: number;
     disbursementYears: number;
@@ -23,7 +24,8 @@ export class StatusResolvedString {
     monthlyPension: string;
     monthlyPensionr: string;
     contribution: string;
-    contributionTotal: string;
+    contributionFixed: string;
+    contributionMontly: string;
     contributionmounths: string;
     contributionYears: string;
     disbursementYears: string;
