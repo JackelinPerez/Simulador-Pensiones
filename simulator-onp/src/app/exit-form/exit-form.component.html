@@ -8,7 +8,9 @@
         <p><strong>Años aportados:     </strong>{{statusResolvedString.contributionYears}}</p>
         <p><strong>Interes ganado, 3.5% anual:     </strong>S/ {{statusResolvedString.interest}}</p>        
 
-        <p *ngIf="20 > statusResolved.contributionYears" class="text-danger text-center"><strong>Te falta {{20-statusResolved.contributionYears}}  años para pensionar</strong></p>
+        <p *ngIf="20 > yearsForPensionar" class="text-danger text-center"><strong>Te falta {{yearsForPensionar}}  años para pensionar</strong></p>
+
+
         <!-- <P><strong>Monto disponible, 30% del total:    </strong>S/ {{statusResolvedString.disburse}}</P>
         <p><strong>Pension en 10 años de vida Sin retiro anticipado: </strong>S/ {{statusResolvedString.monthlyPensionr}}</p>
         <p><strong>Pension en 10 años de vida con retiro anticipado: <label class="text-output border border-white rounded mx-auto text-white">S/ {{statusResolvedString.monthlyPension}}</label></strong></p> -->
@@ -18,7 +20,7 @@
         <label class="pension text-center">Monto para tu sueño:</label>
         <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>        
     </article>
-    <article class="result d-flex flex-column border border-info bg-info mx-auto text-white" *ngIf="statusResolved.contributionYears == 20">
+    <article class="result d-flex flex-column border border-info bg-info mx-auto text-white" *ngIf="yearsForPensionar == 20">
         <label class="pension text-center">Pension mensual:</label>
         <label class="pension text-center">S/ 415</label>
         <label class="pension suma text-center text-danger">+</label>

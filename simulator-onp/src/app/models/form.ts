@@ -11,3 +11,8 @@ export class FormExit {
     contribution: number;
     contributionYears: number;    
 }
+
+export class FormExitString {
+    contribution: string;
+    contributionYears: string;    
+}
