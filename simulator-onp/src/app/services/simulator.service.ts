@@ -81,7 +81,9 @@ export class SimulatorService {
       contribution: 0,
       contributionFixed: 0,
       contributionYears: 0,
-      disbursementYears: 0
+      disbursementYears: 0,
+      monthlyPensionr:0,
+      amountCollected:0
     }
 
     formExit.contributionMontly = formInputsRaw.contributionMontly;
@@ -105,10 +107,6 @@ export class SimulatorService {
     let objNumberAux: StatusResolved = {...objNumber};
     let statusOK:StatusResolvedString = {...this.statusResolvedString};
     Object.keys(objNumberAux).forEach(ele => {
-      // statusOK[ele] = objNumberAux[ele].toLocaleString('de-PEN');
-      // console.log('-------------------------------------');
-      // console.log(ele +': '+objNumberAux[ele]);
-      
       statusOK[ele] = objNumberAux[ele].toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     });
     return statusOK;
@@ -151,7 +149,6 @@ export class SimulatorService {
         promPension = 0;           
         break;
     }
-    console.log('pension: s/'+promPension);
     
     return promPension;
   }

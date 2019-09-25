@@ -1,6 +1,6 @@
 <div class="d-flex flex-column mx-auto">
 
-    <article class="result d-flex flex-column border border-info mx-auto btn-outline-info">
+    <!-- <article class="result d-flex flex-column border border-info mx-auto btn-outline-info">
         <h1 class="result1 text-dark justify-content-center text-center">Resultado</h1>
         <P><strong>Aporte mensual:      </strong>S/ {{statusResolvedString.contributionTotal}}</P>
         <P><strong>Para tu pension :      </strong>S/ 121</P>
@@ -11,18 +11,18 @@
         <p *ngIf="20 > yearsForPensionar" class="text-danger text-center"><strong>Te falta {{yearsForPensionar}}  años para pensionar</strong></p>
 
 
-        <!-- <P><strong>Monto disponible, 30% del total:    </strong>S/ {{statusResolvedString.disburse}}</P>
+        <P><strong>Monto disponible, 30% del total:    </strong>S/ {{statusResolvedString.disburse}}</P>
         <p><strong>Pension en 10 años de vida Sin retiro anticipado: </strong>S/ {{statusResolvedString.monthlyPensionr}}</p>
-        <p><strong>Pension en 10 años de vida con retiro anticipado: <label class="text-output border border-white rounded mx-auto text-white">S/ {{statusResolvedString.monthlyPension}}</label></strong></p> -->
-    </article >
+        <p><strong>Pension en 10 años de vida con retiro anticipado: <label class="text-output border border-white rounded mx-auto text-white">S/ {{statusResolvedString.monthlyPension}}</label></strong></p>
+    </article > -->
 
     <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
         <label class="pension text-center">Monto para tu sueño:</label>
         <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>        
     </article>
-    <article class="result d-flex flex-column border border-info bg-info mx-auto text-white" *ngIf="yearsForPensionar == 20">
+    <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
         <label class="pension text-center">Pension mensual:</label>
-        <label class="pension text-center">S/ 415</label>
+        <label class="pension text-center">S/ {{statusResolvedString.monthlyPensionr}}</label>
         <label class="pension suma text-center text-danger">+</label>
         <label class="pension text-center">Seguro Medico</label>
         <label class="pension text-center">De por vida</label>

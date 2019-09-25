@@ -7,6 +7,7 @@ export class TableNumber {
     missingYears: number;
     interestGained: number;
     amountCollected:number;
+    monthlyPensionr:number;
 }
 
 export class TableString {
@@ -18,4 +19,5 @@ export class TableString {
     missingYears: string;
     interestGained: string;
     amountCollected:string;
+    monthlyPensionr: string;
 }

@@ -13,6 +13,8 @@ export class FormExit {
     contributionFixed: number;
     contributionYears: number;
     disbursementYears: number;
+    monthlyPensionr: number;
+    amountCollected:number
 }
 
 export class FormExitString {
@@ -20,5 +22,7 @@ export class FormExitString {
     contribution: string;
     contributionFixed: string;
     contributionYears: string;
-    disbursementYears: string;    
+    disbursementYears: string;
+    monthlyPensionr: string;
+    amountCollected: string
 }

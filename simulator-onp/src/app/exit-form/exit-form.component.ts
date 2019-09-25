@@ -14,6 +14,10 @@ import {Status, StatusResolved, StatusResolvedString} from '../models/status';
 })
 export class ExitFormComponent implements OnInit {
 
+  statusResolved: any = {
+    amountCollected: 0,
+    monthlyPensionr: 0
+  } 
   statusResolvedString: StatusResolvedString = {
     disburse: '',
     amountCollected: '',
@@ -46,14 +50,10 @@ export class ExitFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.simulatorService.currentForm.subscribe((result: StatusResolved)=>{
-      if(result.contribution < 0) this.router.navigateByUrl('/formulario');
-      else{
-        let calculatePensionOk:StatusResolved = {...this.simulatorService.calculatePension(result)};
-        this.statusPensionsResult = this.statusPension(calculatePensionOk.monthlyPension);
-        this.statusResolvedString = this.simulatorService.convertionTostring(calculatePensionOk);
-        this.yearsForPensionar = this.simulatorService.yearsForPensionar(this.statusResolvedString.contributionYears);
-      }
+    this.simulatorService.currentForm.subscribe((result: any)=>{
+      this.statusResolvedString = this.simulatorService.convertionTostring({...result});
+      this.statusResolved.amountCollected = result.amountCollected;
+      this.statusResolved.monthlyPensionr = result.monthlyPensionr;
       })
   }
 

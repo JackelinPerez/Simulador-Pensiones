@@ -32,15 +32,28 @@ export class EntryFormComponent implements OnInit {
     contribution: 0,
     contributionFixed: 0,
     contributionYears: 0,
-    disbursementYears: 0
+    disbursementYears: 0,
+    monthlyPensionr: 0,
+    amountCollected: 0,
   }
 
+  formExitExit: FormExit ={
+    contributionMontly: 0,
+    contribution: 0,
+    contributionFixed: 0,
+    contributionYears: 0,
+    disbursementYears: 0,
+    monthlyPensionr: 0,
+    amountCollected: 0
+  }  
   formExitTotal: FormExit ={
     contributionMontly: 0,
     contribution: 0,
     contributionFixed: 0,
     contributionYears: 0,
-    disbursementYears: 0
+    disbursementYears: 0,
+    monthlyPensionr: 0,
+    amountCollected: 0
   }
 
   formExitTotalString: FormExitString = {
@@ -48,9 +61,10 @@ export class EntryFormComponent implements OnInit {
     contribution: '',
     contributionFixed: '',
     contributionYears: '',
-    disbursementYears: ''
+    disbursementYears: '',
+    monthlyPensionr: '',
+    amountCollected: ''
   }
-
 
   contributionSee = {
     total:0,
@@ -83,73 +97,61 @@ export class EntryFormComponent implements OnInit {
   }
 
   formSave(customerData_:any){
+
+    // console.log('-----------------------------------------');
+    // Object.keys(this.formExit).forEach(ele => {
+    //   console.log(ele +': '+this.formExit[ele]);
+    // });
+
     if(customerData_ == this.compare){
       alert('Algun campo No ha llenado')
     }
     else {
-      this.simulatorService.changeMenu(customerData_);
+      this.simulatorService.changeMenu({...customerData_});
       this.router.navigateByUrl('/resultado');
       this.checkoutForm.reset();
     }
   }
 
   onChangeYears(newValue:any){
-    // this.formExit.contributionYears = parseInt(newValue);
     this.contributionYears__ = parseInt(newValue);
-    console.log('Periodos de aportes: '+this.contributionYears__);
+    // console.log('Periodos de aportes: '+this.contributionYears__);
     
   }
 
   onChangeYearsDisbursement(newValue:any){
-    // this.formExit.disbursementYears = parseInt(newValue);
     this.disbursementYears__ = parseInt(newValue);
-    console.log('Periodo a desemmbolsar: '+this.disbursementYears__);
+    // console.log('Periodo a desemmbolsar: '+this.disbursementYears__);
     
   }  
 
   onSubmit(customerData:any) {
-
-    // this.contributionSee.total = customerData.contribution;
-    // this.contributionSee.fixed = 121;
-    // this.contributionSee.variable = customerData.contribution -121;
-    // this.formExit.contribution = this.contributionSee.variable;
-
-    //pruebita
-    // let formExit_ = this.simulatorService.amountFixedContribution(
-    //   {contributionMontly: customerData.contribution ,contribution: 0, contributionFixed: 0,
-    //    contributionYears: this.formExit.contributionYears, disbursementYears: this.formExit.disbursementYears},
-    //   {contributionMontly: 458, contribution: 0, contributionFixed: 0, contributionYears: 16, disbursementYears: 0 });
 
     this.formExit = this.simulatorService.amountFixedContribution(
       {contributionMontly: customerData.contribution ,contribution: 0, contributionFixed: 0,
        contributionYears: this.contributionYears__, disbursementYears: this.disbursementYears__},
       this.formExitTotal);
 
-      console.log('-----------------------------------------');
-      Object.keys(this.formExit).forEach(ele => {
-        console.log(ele +': '+this.formExit[ele]);
-      });
-
-    
-    this.simulatorService.monthlyPension(this.formExit.contributionFixed);
+    this.formExit.monthlyPensionr = this.simulatorService.monthlyPension(this.formExit.contributionFixed);
+    this.formExit.amountCollected = this.simulatorService.calculatePension(this.formExit).amountCollected;
 
     this.formInputsNumber.push({
       ... this.formExit,
       interestGained: this.simulatorService.calculatePension(this.formExit).interest,
       missingYears: 20- this.contributionYears__,
-      amountCollected: this.simulatorService.calculatePension(this.formExit).amountCollected
     });
 
 
     this.formInputsString.push({
       contributionMontly: (this.formExit.contributionMontly).toString(),
       contributionFixed: 0,
-      contribution: (this.formExit.contribution).toString(),
+      contribution: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).contribution,
       contributionYears: (this.contributionYears__).toString(),
       disbursementYears: (this.disbursementYears__).toString(),
       interestGained: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).interest,
       missingYears: (20- this.contributionYears__).toString(),
-      amountCollected: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).amountCollected
+      amountCollected: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).amountCollected,
+      monthlyPensionr: this.formExit.monthlyPensionr.toString(),
     });    
 
     this.formExitTotal = this.formInputsNumber.reduce((acum,eleR)=>{
@@ -158,15 +160,21 @@ export class EntryFormComponent implements OnInit {
       acum.contributionFixed += eleR.contributionFixed;
       acum.contributionYears += eleR.contributionYears;
       acum.disbursementYears += eleR.disbursementYears;
+      acum.monthlyPensionr += eleR.monthlyPensionr;
+      acum.amountCollected += eleR.amountCollected;
       return acum;
-    },{contributionMontly:0, contribution: 0, contributionFixed:0, contributionYears:0, disbursementYears:0});
+    },{contributionMontly:0, contribution: 0, contributionFixed:0, contributionYears:0, disbursementYears:0, monthlyPensionr:0, amountCollected:0});
+
+    this.formExitExit = {...this.formExit};
 
     this.formExitTotalString = {
       contributionMontly: this.simulatorService.convertionTostring(this.formExitTotal).contributionMontly,
       contribution: this.simulatorService.convertionTostring(this.formExitTotal).contribution,
       contributionFixed: this.simulatorService.convertionTostring(this.formExitTotal).contributionFixed,
       contributionYears: this.simulatorService.convertionTostring(this.formExitTotal).contributionYears,
-      disbursementYears: this.simulatorService.convertionTostring(this.formExitTotal).disbursementYears
+      disbursementYears: this.simulatorService.convertionTostring(this.formExitTotal).disbursementYears,
+      monthlyPensionr: this.simulatorService.convertionTostring(this.formExitTotal).monthlyPensionr,
+      amountCollected: this.simulatorService.convertionTostring(this.formExitTotal).amountCollected
     }
   }
 }
