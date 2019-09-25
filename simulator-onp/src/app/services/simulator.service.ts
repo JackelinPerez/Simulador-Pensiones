@@ -30,7 +30,8 @@ export class SimulatorService {
     contributionmounths: '',
     contributionYears: '',
     disbursementYears: '',
-    interest: ''    
+    interest: '',
+    disbursementAmountCollected: ''
   };
 
   changeMenu(value: any){
@@ -53,7 +54,8 @@ export class SimulatorService {
       contributionmounths: 0,
       contributionYears: 0,
       disbursementYears: 0,
-      interest: 0
+      interest: 0,
+      disbursementAmountCollected: 0
     };
 
     statusResolved.contribution = outputForm.contribution;
@@ -83,14 +85,15 @@ export class SimulatorService {
       contributionYears: 0,
       disbursementYears: 0,
       monthlyPensionr:0,
-      amountCollected:0
+      amountCollected:0,
+      disbursementAmountCollected: 0
     }
 
     formExit.contributionMontly = formInputsRaw.contributionMontly;
     formExit.contributionYears = formInputsRaw.contributionYears;
     formExit.disbursementYears = formInputsRaw.disbursementYears;
+    formExit.disbursementAmountCollected = formInputsRaw.disbursementAmountCollected;
 
-    // if((formInputsRaw.contributionYears <= formInputsTotal.contributionYears) || !formInputsTotal.contributionYears ){
     if((formInputsTotal.contributionYears < formInputsRaw.disbursementYears) || !formInputsTotal.contributionYears ){
     formExit.contribution = formInputsRaw.contributionMontly - 121;
       formExit.contributionFixed = 121;

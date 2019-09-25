@@ -15,6 +15,7 @@ export class StatusResolved {
     contributionYears: number;
     disbursementYears: number;
     interest: number;
+    disbursementAmountCollected: number;
 }
 
 export class StatusResolvedString {
@@ -29,5 +30,6 @@ export class StatusResolvedString {
     contributionmounths: string;
     contributionYears: string;
     disbursementYears: string;
-    interest: string;    
+    interest: string;
+    disbursementAmountCollected: string;
 }

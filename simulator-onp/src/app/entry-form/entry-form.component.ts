@@ -24,6 +24,8 @@ export class EntryFormComponent implements OnInit {
   formInputsNumber: TableNumber []= [];
   formInputsString: TableString []= [];
   
+  amountCollected = [];
+
   contributionYears__: number = 0;
   disbursementYears__: number = 0;
 
@@ -35,6 +37,7 @@ export class EntryFormComponent implements OnInit {
     disbursementYears: 0,
     monthlyPensionr: 0,
     amountCollected: 0,
+    disbursementAmountCollected: 0
   }
 
   formExitExit: FormExit ={
@@ -44,7 +47,8 @@ export class EntryFormComponent implements OnInit {
     contributionYears: 0,
     disbursementYears: 0,
     monthlyPensionr: 0,
-    amountCollected: 0
+    amountCollected: 0,
+    disbursementAmountCollected: 0
   }  
   formExitTotal: FormExit ={
     contributionMontly: 0,
@@ -53,7 +57,8 @@ export class EntryFormComponent implements OnInit {
     contributionYears: 0,
     disbursementYears: 0,
     monthlyPensionr: 0,
-    amountCollected: 0
+    amountCollected: 0,
+    disbursementAmountCollected: 0
   }
 
   formExitTotalString: FormExitString = {
@@ -63,7 +68,8 @@ export class EntryFormComponent implements OnInit {
     contributionYears: '',
     disbursementYears: '',
     monthlyPensionr: '',
-    amountCollected: ''
+    amountCollected: '',
+    disbursementAmountCollected: ''
   }
 
   contributionSee = {
@@ -107,6 +113,9 @@ export class EntryFormComponent implements OnInit {
       alert('Algun campo No ha llenado')
     }
     else {
+          this.amountCollected.forEach((ele, index)=>{
+            console.log('desembolso'+'['+index+']= '+ ele);
+          })
       this.simulatorService.changeMenu({...customerData_});
       this.router.navigateByUrl('/resultado');
       this.checkoutForm.reset();
@@ -128,8 +137,7 @@ export class EntryFormComponent implements OnInit {
   onSubmit(customerData:any) {
 
     this.formExit = this.simulatorService.amountFixedContribution(
-      {contributionMontly: customerData.contribution ,contribution: 0, contributionFixed: 0,
-       contributionYears: this.contributionYears__, disbursementYears: this.disbursementYears__},
+      {... this.formExit, contributionMontly: customerData.contribution, contributionYears: this.contributionYears__, disbursementYears: this.disbursementYears__},
       this.formExitTotal);
 
     this.formExit.monthlyPensionr = this.simulatorService.monthlyPension(this.formExit.contributionFixed);
@@ -152,6 +160,7 @@ export class EntryFormComponent implements OnInit {
       missingYears: (20- this.contributionYears__).toString(),
       amountCollected: this.simulatorService.convertionTostring(this.simulatorService.calculatePension(this.formExit)).amountCollected,
       monthlyPensionr: this.formExit.monthlyPensionr.toString(),
+      disbursementAmountCollected : this.formExit.disbursementAmountCollected.toString()
     });    
 
     this.formExitTotal = this.formInputsNumber.reduce((acum,eleR)=>{
@@ -162,8 +171,23 @@ export class EntryFormComponent implements OnInit {
       acum.disbursementYears += eleR.disbursementYears;
       acum.monthlyPensionr += eleR.monthlyPensionr;
       acum.amountCollected += eleR.amountCollected;
+      acum.disbursementAmountCollected += eleR.disbursementAmountCollected;
       return acum;
-    },{contributionMontly:0, contribution: 0, contributionFixed:0, contributionYears:0, disbursementYears:0, monthlyPensionr:0, amountCollected:0});
+    },{contributionMontly:0, contribution: 0, contributionFixed:0, contributionYears:0, disbursementYears:0, monthlyPensionr:0, amountCollected:0, disbursementAmountCollected:0});
+
+    if(this.formExitTotal.contributionYears% this.formExit.disbursementYears === 0){
+      this.amountCollected.push(this.formExitTotal.amountCollected);
+    }
+
+    this.amountCollected.forEach((ele, index)=>{
+      if(index === 0) this.formExit.disbursementAmountCollected = ele;
+      else if (index === this.amountCollected.length -1) this.formExit.amountCollected = ele - this.formExit.disbursementAmountCollected;
+    })
+
+    console.log('-----------------------------------------');
+    Object.keys(this.formExit).forEach(ele => {
+      console.log(ele +': '+this.formExit[ele]);
+    });
 
     this.formExitExit = {...this.formExit};
 
@@ -174,7 +198,8 @@ export class EntryFormComponent implements OnInit {
       contributionYears: this.simulatorService.convertionTostring(this.formExitTotal).contributionYears,
       disbursementYears: this.simulatorService.convertionTostring(this.formExitTotal).disbursementYears,
       monthlyPensionr: this.simulatorService.convertionTostring(this.formExitTotal).monthlyPensionr,
-      amountCollected: this.simulatorService.convertionTostring(this.formExitTotal).amountCollected
+      amountCollected: this.simulatorService.convertionTostring(this.formExitTotal).amountCollected,
+      disbursementAmountCollected: this.simulatorService.convertionTostring(this.formExitTotal).disbursementAmountCollected
     }
   }
 }

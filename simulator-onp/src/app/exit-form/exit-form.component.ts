@@ -16,7 +16,8 @@ export class ExitFormComponent implements OnInit {
 
   statusResolved: any = {
     amountCollected: 0,
-    monthlyPensionr: 0
+    disbursementAmountCollected: 0,
+    monthlyPensionr: 0,
   } 
   statusResolvedString: StatusResolvedString = {
     disburse: '',
@@ -30,7 +31,8 @@ export class ExitFormComponent implements OnInit {
     contributionmounths: '',
     contributionYears: '',
     disbursementYears: '',
-    interest: ''    
+    interest: '',
+    disbursementAmountCollected: ''
   };
   statusPensionsResult: Status;
   statusPensions: Status[] = [
@@ -54,6 +56,7 @@ export class ExitFormComponent implements OnInit {
       this.statusResolvedString = this.simulatorService.convertionTostring({...result});
       this.statusResolved.amountCollected = result.amountCollected;
       this.statusResolved.monthlyPensionr = result.monthlyPensionr;
+      this.statusResolved.disbursementAmountCollected = result.disbursementAmountCollected;
       })
   }
 

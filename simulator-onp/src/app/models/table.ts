@@ -8,6 +8,7 @@ export class TableNumber {
     interestGained: number;
     amountCollected:number;
     monthlyPensionr:number;
+    disbursementAmountCollected: number;
 }
 
 export class TableString {
@@ -20,4 +21,5 @@ export class TableString {
     interestGained: string;
     amountCollected:string;
     monthlyPensionr: string;
+    disbursementAmountCollected: string;
 }
