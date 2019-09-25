@@ -5,7 +5,7 @@ import { SimulatorService} from '../services/simulator.service';
 import { Router } from '@angular/router';
 
 //incluyendo clases
-import {Status, StatusResolved, StatusResolvedString} from '../models/status';
+import { FormExit,FormExitString } from '../models/form';
 
 @Component({
   selector: 'app-exit-form',
@@ -14,37 +14,17 @@ import {Status, StatusResolved, StatusResolvedString} from '../models/status';
 })
 export class ExitFormComponent implements OnInit {
 
-  statusResolved: any = {
-    amountCollected: 0,
-    disbursementAmountCollected: 0,
-    monthlyPensionr: 0,
-  } 
-  statusResolvedString: StatusResolvedString = {
-    disburse: '',
-    amountCollected: '',
-    amountVariable: '',
-    monthlyPension: '',
-    monthlyPensionr:'',
-    contribution:'',
-    contributionFixed:'',
-    contributionMontly:'',
-    contributionmounths: '',
+  statusResolvedString: FormExitString = {
+    contributionMontly: '',
+    contribution: '',
+    contributionFixed: '',
     contributionYears: '',
     disbursementYears: '',
-    interest: '',
-    disbursementAmountCollected: ''
-  };
-  statusPensionsResult: Status;
-  statusPensions: Status[] = [
-    {message: 'Ayuda!',
-    img: 'assets/img/cry.gif'},
-    {message: 'Bien!',
-    img: 'assets/img/good.gif'},
-    {message: 'Provechito!',
-    img: 'assets/img/winner.gif'},
-  ];
-
-  yearsForPensionar: number = 0;
+    monthlyPensionr: '',
+    amountCollected: '',
+    disbursementAmountCollected: '',
+    pensionerForPensionr: ''
+  }
 
   constructor(
     private simulatorService: SimulatorService,
@@ -52,20 +32,9 @@ export class ExitFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.simulatorService.currentForm.subscribe((result: any)=>{
+    this.simulatorService.currentForm.subscribe((result: FormExit)=>{
       this.statusResolvedString = this.simulatorService.convertionTostring({...result});
-      this.statusResolved.amountCollected = result.amountCollected;
-      this.statusResolved.monthlyPensionr = result.monthlyPensionr;
-      this.statusResolved.disbursementAmountCollected = result.disbursementAmountCollected;
       })
-  }
-
-  statusPension(totalAcum:number){
-    let result:Status ={message:'', img:''};
-    if(totalAcum<200) result = this.statusPensions[0];
-    else if (totalAcum<400 && totalAcum>=200) result = this.statusPensions[1];
-    else result = this.statusPensions[2];
-    return result;
   }
 
   onSubmit() {

@@ -9,6 +9,7 @@ export class TableNumber {
     amountCollected:number;
     monthlyPensionr:number;
     disbursementAmountCollected: number;
+    pensionerForPensionr: number;
 }
 
 export class TableString {
@@ -22,4 +23,5 @@ export class TableString {
     amountCollected:string;
     monthlyPensionr: string;
     disbursementAmountCollected: string;
+    pensionerForPensionr: string;
 }

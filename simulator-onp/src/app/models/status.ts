@@ -16,6 +16,7 @@ export class StatusResolved {
     disbursementYears: number;
     interest: number;
     disbursementAmountCollected: number;
+    pensionerForPensionr: number;
 }
 
 export class StatusResolvedString {
@@ -32,4 +33,5 @@ export class StatusResolvedString {
     disbursementYears: string;
     interest: string;
     disbursementAmountCollected: string;
+    pensionerForPensionr: string;
 }

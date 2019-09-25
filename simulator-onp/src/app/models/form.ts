@@ -16,6 +16,7 @@ export class FormExit {
     monthlyPensionr: number;
     amountCollected:number;
     disbursementAmountCollected: number;
+    pensionerForPensionr: number;
 }
 
 export class FormExitString {
@@ -27,4 +28,5 @@ export class FormExitString {
     monthlyPensionr: string;
     amountCollected: string;
     disbursementAmountCollected: string;
+    pensionerForPensionr: string;
 }

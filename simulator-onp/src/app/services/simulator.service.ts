@@ -31,68 +31,39 @@ export class SimulatorService {
     contributionYears: '',
     disbursementYears: '',
     interest: '',
-    disbursementAmountCollected: ''
+    disbursementAmountCollected: '',
+    pensionerForPensionr: ''
   };
+
 
   changeMenu(value: any){
     this.formSave.next(value);
   }
 
+
   calculatePension(outputForm: any){
     const rate = 3.5/1200;//tasa efectiva de 5% anual
     const withdrawal = 30/100;//30% porcentaje a retirar
     const lifeYears = 10*12;//10 años de pension
-    let statusResolved: StatusResolved = {
-      disburse: 0,
-      amountCollected: 0,
-      amountVariable: 0,
-      monthlyPension: 0,
-      monthlyPensionr:0,
-      contribution:0,
-      contributionFixed: 0,
-      contributionMontly:0,
-      contributionmounths: 0,
-      contributionYears: 0,
-      disbursementYears: 0,
-      interest: 0,
-      disbursementAmountCollected: 0
-    };
-
-    statusResolved.contribution = outputForm.contribution;
-    statusResolved.contributionYears = outputForm.contributionYears;
+    let statusResolved: StatusResolved = {...outputForm};
     statusResolved.contributionmounths = outputForm.contributionYears*12;
     statusResolved.amountCollected = (statusResolved.contribution*((Math.pow((1+(rate)),statusResolved.contributionmounths+1)-1)/(rate)-1));
     statusResolved.disburse = ((withdrawal)*statusResolved.amountCollected);
     statusResolved.monthlyPension = (((1-(withdrawal))*statusResolved.amountCollected)/(lifeYears));
     statusResolved.monthlyPensionr = (((1-(0))*statusResolved.amountCollected)/(lifeYears));
     statusResolved.interest = (statusResolved.amountCollected - statusResolved.contribution*statusResolved.contributionmounths);
-    statusResolved.contributionMontly = outputForm.contributionMontly;
     statusResolved.amountVariable = outputForm.contribution;
-    statusResolved.disbursementYears = outputForm.disbursementYears;
-    statusResolved.contributionFixed = outputForm.contributionFixed;
     return statusResolved;
   }
   
+
   yearsForPensionar(years:string){
     return 20-parseInt(years);
   }
 
-  amountFixedContribution(formInputsRaw: any, formInputsTotal: any){
-    let formExit: FormExit ={
-      contributionMontly:0,
-      contribution: 0,
-      contributionFixed: 0,
-      contributionYears: 0,
-      disbursementYears: 0,
-      monthlyPensionr:0,
-      amountCollected:0,
-      disbursementAmountCollected: 0
-    }
 
-    formExit.contributionMontly = formInputsRaw.contributionMontly;
-    formExit.contributionYears = formInputsRaw.contributionYears;
-    formExit.disbursementYears = formInputsRaw.disbursementYears;
-    formExit.disbursementAmountCollected = formInputsRaw.disbursementAmountCollected;
+  amountFixedContribution(formInputsRaw: any, formInputsTotal: any){
+    let formExit = {... formInputsRaw};
 
     if((formInputsTotal.contributionYears < formInputsRaw.disbursementYears) || !formInputsTotal.contributionYears ){
     formExit.contribution = formInputsRaw.contributionMontly - 121;
@@ -102,18 +73,39 @@ export class SimulatorService {
       formExit.contribution = formInputsRaw.contributionMontly*0.29;
       formExit.contributionFixed = formInputsRaw.contributionMontly*0.61; 
     }
-
     return formExit;
   }
   
+
+  saveExitdisbursement(formExit: FormExit, formExitTotal: FormExit, arrayAcum: any){
+
+    if(formExitTotal.contributionYears % formExit.disbursementYears === 0){
+      arrayAcum.push(formExitTotal.amountCollected);
+    }
+    
+    arrayAcum.forEach((ele:any, index:number)=>{
+      if(index === 0) formExit.disbursementAmountCollected = ele;
+      else if (index === arrayAcum.length -1) formExit.amountCollected = ele - formExit.disbursementAmountCollected;
+    })
+
+    // console.log('-----------------------------------------');
+    // Object.keys(formExit).forEach(ele => {
+    //   console.log(ele +': '+formExit[ele]);
+    // });
+
+    return formExit;
+  }
+
+
   convertionTostring(objNumber: any){
     let objNumberAux: StatusResolved = {...objNumber};
-    let statusOK:StatusResolvedString = {...this.statusResolvedString};
+    let statusOK: StatusResolvedString = {...this.statusResolvedString};
     Object.keys(objNumberAux).forEach(ele => {
       statusOK[ele] = objNumberAux[ele].toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
     });
     return statusOK;
   }
+
 
   monthlyPension(fixedPension: number){
     let promPension:number = 0;
@@ -152,7 +144,6 @@ export class SimulatorService {
         promPension = 0;           
         break;
     }
-    
     return promPension;
   }
 
