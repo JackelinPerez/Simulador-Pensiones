@@ -100,6 +100,10 @@ export class EntryFormComponent implements OnInit {
      { value: 20 }
   ];
 
+  contributionYears___: Object[] = [
+    { value: 'N° '},
+    { value: 5 },
+ ];  
 
   constructor(private formBuilder: FormBuilder, private simulatorService:SimulatorService,private router: Router) {
     this.checkoutForm = this.formBuilder.group(this.compare);
