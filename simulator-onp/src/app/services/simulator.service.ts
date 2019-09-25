@@ -82,17 +82,16 @@ export class SimulatorService {
     if(formExitTotal.contributionYears % formExit.disbursementYears === 0){
       arrayAcum.push(formExitTotal.amountCollected);
     }
-    
     arrayAcum.forEach((ele:any, index:number)=>{
       if(index === 0) formExit.disbursementAmountCollected = ele;
-      else if (index === arrayAcum.length -1) formExit.amountCollected = ele - formExit.disbursementAmountCollected;
     })
+
+    formExit.amountCollected = formExitTotal.amountCollected - formExit.disbursementAmountCollected;
 
     // console.log('-----------------------------------------');
     // Object.keys(formExit).forEach(ele => {
     //   console.log(ele +': '+formExit[ele]);
     // });
-
     return formExit;
   }
 
