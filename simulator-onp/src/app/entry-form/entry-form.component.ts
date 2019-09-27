@@ -98,8 +98,6 @@ export class EntryFormComponent implements OnInit {
      { value: 10 },
      { value: 15 },
      { value: 20 },
-     { value: 25 },
-     { value: 30 },
   ];
 
   contributionYears___: Object[] = [
@@ -174,7 +172,7 @@ export class EntryFormComponent implements OnInit {
     },{contributionMontly:0, contribution: 0, contributionFixed:0, contributionYears:0, disbursementYears:0, monthlyPensionr:0, amountCollected:0, disbursementAmountCollected:0, pensionerForPensionr:0});
 
     //salida
-    this.formExit.pensionerForPensionr = 30 - this.formExitTotal.contributionYears;
+    this.formExit.pensionerForPensionr = 20 - this.formExitTotal.contributionYears;
 
     this.formExitExit = this.simulatorService.saveExitdisbursement(this.formExit,this.formExitTotal,this.amountCollected);
 
