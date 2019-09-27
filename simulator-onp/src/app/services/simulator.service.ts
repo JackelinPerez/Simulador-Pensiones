@@ -13,8 +13,20 @@ import { FormExit} from '../models/form';
   providedIn: 'root'
 })
 export class SimulatorService {
+  //pruebas Observables
   private formSave = new BehaviorSubject({});
   public currentForm = this.formSave.asObservable();
+
+  //observable screen1
+  private formScreen1 = new BehaviorSubject({});
+  public currentForm1 = this.formScreen1.asObservable();
+
+  //observable screen2
+  private formScreen2 = new BehaviorSubject({});
+  public currentForm2 = this.formScreen2.asObservable();
+
+
+
 
   constructor() {};
 
@@ -40,6 +52,13 @@ export class SimulatorService {
     this.formSave.next(value);
   }
 
+  changeScreen1(value: any){
+    this.formScreen1.next(value);
+  }
+
+  changeScreen2(value: any){
+    this.formScreen2.next(value);
+  }
 
   calculatePension(outputForm: any){
     const rate = 3.5/1200;//tasa efectiva de 5% anual
