@@ -1,5 +1,27 @@
-export class Table {
+export class TableNumber {
     contribution: number;
+    contributionFixed: number;
+    contributionMontly: number;
     contributionYears: number;
-    missingYears: number;   
+    disbursementYears: number;
+    missingYears: number;
+    interestGained: number;
+    amountCollected:number;
+    monthlyPensionr:number;
+    disbursementAmountCollected: number;
+    pensionerForPensionr: number;
+}
+
+export class TableString {
+    contribution: string;
+    contributionFixed: number;
+    contributionMontly: string;
+    contributionYears: string;
+    disbursementYears: string;
+    missingYears: string;
+    interestGained: string;
+    amountCollected:string;
+    monthlyPensionr: string;
+    disbursementAmountCollected: string;
+    pensionerForPensionr: string;
 }

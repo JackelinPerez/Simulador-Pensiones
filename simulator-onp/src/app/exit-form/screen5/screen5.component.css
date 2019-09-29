@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Signika:700,300,600);
+
+*{
+    border-radius: 30px;
+}
+.result{
+    padding: 2%;
+    margin: 2%;
+}
+
+.leyenda{
+    margin:  5%;
+    padding: 2%;
+}
+
+.result1{
+    margin: 10% 0%;
+}
+
+.text-output{
+    background: grey;
+}
+
+.button{
+    margin: 2%;
+}
+
+.pension{
+    font-size:2.5em;
+    /* font:bold 7.5vw/1.2 'Signika', sans-serif; */
+    user-select:none;
+    /* text-shadow:1px 1px hsl(189, 87%, 58%), 2px 2px hsl(189, 87%, 58%), 3px 3px hsl(189, 87%, 58%), 4px 4px hsl(189, 87%, 58%); */
+}
+
+.suma{
+
+}
+
+  

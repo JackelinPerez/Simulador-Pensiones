@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "simulatoronp"
+    "default": "simuladornoflexible",
+    "simuladorNoflexible": "simuladornoflexible",
+    "pruebitas": "pruebas-onp"
   }
 }

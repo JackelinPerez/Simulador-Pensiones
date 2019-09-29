@@ -1,42 +1,16 @@
 <div class="d-flex flex-column mx-auto">
-
-    <article class="result d-flex flex-column border border-info mx-auto btn-outline-info">
-        <h1 class="result1 text-dark justify-content-center text-center">Resultado</h1>
-        <P><strong>Aporte mensual:      </strong>S/ {{statusResolvedString.contributionTotal}}</P>
-        <P><strong>Para tu pension :      </strong>S/ 121</P>
-        <P><strong>Para tu sueño:      </strong>S/ {{statusResolvedString.amountVariable}}</P>
-        <p><strong>Años aportados:     </strong>{{statusResolvedString.contributionYears}}</p>
-        <p><strong>Interes ganado, 3.5% anual:     </strong>S/ {{statusResolvedString.interest}}</p>        
-
-        <p *ngIf="20 > statusResolved.contributionYears" class="text-danger text-center"><strong>Te falta {{20-statusResolved.contributionYears}}  años para pensionar</strong></p>
-        <!-- <P><strong>Monto disponible, 30% del total:    </strong>S/ {{statusResolvedString.disburse}}</P>
-        <p><strong>Pension en 10 años de vida Sin retiro anticipado: </strong>S/ {{statusResolvedString.monthlyPensionr}}</p>
-        <p><strong>Pension en 10 años de vida con retiro anticipado: <label class="text-output border border-white rounded mx-auto text-white">S/ {{statusResolvedString.monthlyPension}}</label></strong></p> -->
-    </article >
-
     <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
         <label class="pension text-center">Monto para tu sueño:</label>
-        <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>        
+        <label class="pension text-center">S/ {{statusResolvedString.disbursementAmountCollected}}</label>        
     </article>
-    <article class="result d-flex flex-column border border-info bg-info mx-auto text-white" *ngIf="statusResolved.contributionYears == 20">
+    <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
+        <label class="pension text-center">Ademas un desembolso:</label>
+        <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>            
         <label class="pension text-center">Pension mensual:</label>
-        <label class="pension text-center">S/ 415</label>
+        <label class="pension text-center">S/ {{statusResolvedString.monthlyPensionr}}</label>
         <label class="pension suma text-center text-danger">+</label>
         <label class="pension text-center">Seguro Medico</label>
         <label class="pension text-center">De por vida</label>
     </article>
-
-    <!-- <div class="justify-content-center mx-auto" *ngIf="statusPensionsResult">
-        <h1 class="text-danger mx-auto text-center"><strong>{{statusPensionsResult.message}}</strong></h1>
-        <img [src]="statusPensionsResult.img" class="border border-dark" style="height:200px ;width:200px">
-    </div> -->
-
-    <!-- <article class="leyenda d-flex flex-column border border-dark rounded  mx-auto text-success">
-        <h3 class="text-dark justify-content-center text-center">NOTA:</h3>
-        <p><strong>TEA: </strong> 3.5%</p>
-        <p><strong>Retiro: </strong> 50% del fondo total</p>
-        <p>Promedio de <strong>10 años</strong> pensionados</p>
-    </article> -->
-
     <button class="button btn btn-outline-info mx-auto rounded" (click)="onSubmit()">Volver</button>
 </div>

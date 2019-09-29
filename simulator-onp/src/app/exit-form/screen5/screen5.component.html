@@ -1,0 +1,17 @@
+<div class="d-flex flex-column mx-auto">
+        <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
+            <label class="pension text-center">Monto para tu: {{dreamOutput}}</label>
+            <label class="pension text-center">S/ {{statusResolvedString.disbursementAmountCollected}}</label>        
+        </article>
+        <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
+            <label class="pension text-center">Ademas un desembolso:</label>
+            <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>            
+            <label class="pension text-center">Pension mensual:</label>
+            <label class="pension text-center">S/ {{statusResolvedString.monthlyPensionr}}</label>
+            <label class="pension suma text-center text-danger">+</label>
+            <label class="pension text-center">Seguro Medico</label>
+            <label class="pension text-center">De por vida</label>
+        </article>
+        <button class="button btn btn-outline-info mx-auto rounded" (click)="onSubmit()">Volver</button>
+</div>
+    

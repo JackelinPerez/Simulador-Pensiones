@@ -1,0 +1,16 @@
+<div class="d-flex flex-column mx-auto">
+    <article class="jumbotron form-group  text-center mx-auto">
+        Chevere! con <strong>S/.{{formScreen2.contribution}}</strong> mensual pudiste ahorrar: .....<br>
+        En <strong>{{formScreen2.contributionYears}}</strong> años tendras "n" soles para alcanzar tu <strong>{{formScreen1.dream}}</strong>
+    </article>
+    <div class="d-flex flex-column mx-auto text-center">
+        <label *ngIf="20 - formScreen2.contributionYears > 0">Te falta:
+            <strong class="text-danger display-4">{{20 - formScreen2.contributionYears}} años</strong> para asegurar tu futuro
+        </label>
+        <label *ngIf="20 - formScreen2.contributionYears == 0">
+                <strong class="display-4">Tienes un futuro asegurado!</strong>
+        </label>
+        <button class="button btn btn-outline-info mx-auto rounded" (click)="onSubmit()">Siguiente</button>
+    </div>
+</div>
+
