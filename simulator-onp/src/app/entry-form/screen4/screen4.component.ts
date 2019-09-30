@@ -40,7 +40,11 @@ export class Screen4Component implements OnInit {
   }
 
   onSubmit(customerData:any) {
-    this.simulatorService.changeScreen4({...customerData});
-    this.router.navigateByUrl('/pantalla_5');
+    if (parseInt(customerData.contributionMontly)>=200) {
+      this.simulatorService.changeScreen4({...customerData});
+      this.router.navigateByUrl('/pantalla_5');
+    } else {
+      alert('Por favor introducir un monto minimo de S/200.00');
+    }
   }  
 }
