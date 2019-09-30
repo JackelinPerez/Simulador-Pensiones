@@ -20,7 +20,7 @@ export class Screen2Component implements OnInit {
 
   dreamOutput: string = '';
   checkoutForm_: FormScreen2 = {
-    contribution: '',
+    contributionMontly: '',
     contributionYears: ''
   };
   contributionYears: Object[] = [

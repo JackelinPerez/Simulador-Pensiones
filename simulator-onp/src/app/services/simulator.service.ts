@@ -25,6 +25,13 @@ export class SimulatorService {
   private formScreen2 = new BehaviorSubject({});
   public currentForm2 = this.formScreen2.asObservable();
 
+  //observable screen3
+  private formScreen3 = new BehaviorSubject({});
+  public currentForm3 = this.formScreen3.asObservable();
+
+  //observable screen4
+  private formScreen4 = new BehaviorSubject({});
+  public currentForm4 = this.formScreen4.asObservable();
 
 
 
@@ -47,7 +54,6 @@ export class SimulatorService {
     pensionerForPensionr: ''
   };
 
-
   changeMenu(value: any){
     this.formSave.next(value);
   }
@@ -58,6 +64,14 @@ export class SimulatorService {
 
   changeScreen2(value: any){
     this.formScreen2.next(value);
+  }
+
+  changeScreen3(value: any){
+    this.formScreen3.next(value);
+  }
+  
+  changeScreen4(value: any){
+    this.formScreen4.next(value);
   }
 
   calculatePension(outputForm: any){

@@ -21,7 +21,7 @@ export class Screen4Component implements OnInit {
 
   dreamOutput: string = '';
   checkoutForm_: FormScreen4 = {
-    contributionYears: ''
+    contributionMontly: ''
   };
 
   checkoutForm; 
@@ -34,13 +34,13 @@ export class Screen4Component implements OnInit {
   }
 
   ngOnInit() {
-    this.simulatorService.currentForm1.subscribe((result :FormScreen1)=>{
-      this.dreamOutput = result.dream;
-    }) 
+    this.simulatorService.currentForm1.subscribe((result1 :FormScreen1)=>{
+      this.dreamOutput = result1.dream;
+    });
   }
 
   onSubmit(customerData:any) {
-    this.simulatorService.changeMenu({...customerData});
+    this.simulatorService.changeScreen4({...customerData});
     this.router.navigateByUrl('/pantalla_5');
   }  
 }
