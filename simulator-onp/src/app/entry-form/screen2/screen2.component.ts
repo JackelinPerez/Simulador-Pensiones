@@ -19,18 +19,19 @@ import { SimulatorService} from '../../services/simulator.service';
 export class Screen2Component implements OnInit {
 
   dreamOutput: string = '';
+  alertAmounth: string = '';
   checkoutForm_: FormScreen2 = {
-    contribution: '',
+    contributionMontly: '',
     contributionYears: ''
   };
-  contributionYears: Object[] = [
+  contributionYears: any[] = [
     { value: 'N° '},
     { value: 5 },
     { value: 10 },
     { value: 15 },
     { value: 20 },
  ];
- disbursementYears_:number = 0;
+ disbursementYears_:any = 'N° ';
   checkoutForm; 
   constructor(
     private formBuilder:FormBuilder,
@@ -47,8 +48,15 @@ export class Screen2Component implements OnInit {
   }
 
   onSubmit(customerData:any) {
-    this.simulatorService.changeScreen2({...customerData, contributionYears: this.disbursementYears_});
-    this.router.navigateByUrl('/pantalla_3');
+    if (parseInt(customerData.contributionMontly)>=200 && this.disbursementYears_ !== 'N° ') {
+      this.simulatorService.changeScreen2({...customerData, contributionYears: this.disbursementYears_});
+      this.router.navigateByUrl('/pantalla_3');
+    } else if(this.disbursementYears_ === 'N° '){
+      alert('Por favor introducir periodo de desembolso');
+    } else{
+      alert('Por favor introducir un monto minimo de S/200.00');
+    }
+
   }
 
   onChangeYearsDisbursement(newValue:any){

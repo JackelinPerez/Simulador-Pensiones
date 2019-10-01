@@ -1,17 +1,20 @@
 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" class="formulario d-flex flex-column justify-content-center">
-    <div class="form-group mx-auto">
-        <label for="contribution">
-            ¿Cuánto Dinero puedes juntar cada mes para tu <strong>{{dreamOutput}}</strong> ?
+    <div class="form-group justify-content-center">
+        <label for="contributionMontly">
+            ¿Cuánto Dinero puedes aportar mensualmente para obtener tu <strong>{{dreamOutput}}</strong> y asegurar tu futuro?
         </label>  
-        <input id="contribution" type="text" formControlName="contribution" class="form-control" placeholder="S/.">
+        <input id="contributionMontly" type="text" formControlName="contributionMontly" class="form-control" placeholder="Minimo S/.200">
     </div>
-    <div class="form-group mx-auto">
+    <div class="form-group">
         <label for="contributionYears">
-            ¿Cuándo te gustaria alcanzar tu <strong>{{dreamOutput}}</strong> ?
+            ¿En cuantos años te gustaría alcanzar tu <strong>{{dreamOutput}}</strong> ?
         </label>          
-        <select id="contributionYears" formControlName="contributionYears" class="custom-select form-group text-center"(change)="onChangeYearsDisbursement($event.target.value)">
+        <select id="contributionYears" formControlName="contributionYears" class="custom-select form-group text-center"(change)="onChangeYearsDisbursement($event.target.value)" [value]="contributionYears[0].value">
             <option *ngFor= "let contributionYear of contributionYears" class="form-control text-center" [value]="contributionYear.value"> {{contributionYear.value}} años</option>
         </select>  
     </div>
     <button class="button btn btn-outline-info mx-auto rounded" type="submit" >Guardar</button>
+    <!-- <div *ngIf="alertAmounth" class="alert alert-danger alert-dismissible text-center" role="alert">
+        {{alertAmounth}}
+    </div> -->
 </form>

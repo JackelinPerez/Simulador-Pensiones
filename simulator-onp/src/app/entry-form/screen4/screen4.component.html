@@ -1,9 +1,9 @@
 <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" class="formulario d-flex flex-column justify-content-center">
         <div class="form-group mx-auto">
-            <label for="contributionYears">
-                ¿Cuánto quieres juntar para asegurar tu futuro ?
+            <label for="contributionMontly">
+                ¿Cuánto aportarías mensualmente para asegurar tu futuro?
             </label>  
-            <input id="contributionYears" type="text" formControlName="contributionYears" class="form-control" placeholder="Minimo S/.200">
+            <input id="contributionMontly" type="text" formControlName="contributionMontly" class="form-control" placeholder="Minimo S/.200">
         </div>
         <button class="button btn btn-outline-info mx-auto rounded" type="submit" >Guardar</button>
 </form>

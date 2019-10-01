@@ -5,12 +5,12 @@ export class FormScreen1 {
 }
 
 export class FormScreen2 {
-    contribution: string;
+    contributionMontly: string;
     contributionYears: string;
 }
 
 export class FormScreen4 {
-    contributionYears: string;
+    contributionMontly: string;
 }
 
 export class Form {
