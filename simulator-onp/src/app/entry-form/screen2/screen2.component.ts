@@ -26,6 +26,7 @@ export class Screen2Component implements OnInit {
   };
   contributionYears: any[] = [
     { value: 'N° '},
+    { value: 3 },
     { value: 5 },
     { value: 10 },
     { value: 15 },

@@ -1,10 +1,10 @@
 <div class="formulario d-flex flex-column mx-auto">
     <article class="jumbotron form-group flex-column text-center mx-auto">
         Fabuloso! <br> Con <strong>S/{{statusResolvedString.contributionMontly}}</strong> mensual pudiste ahorrar: <br> <strong>S/{{statusResolvedString.amountCollected}}</strong><br>
-        En <strong>{{statusResolvedString.contributionYears}}</strong> años podrás retirarlo y cumplir tu sueño de: <strong>{{formScreen1.dream}}</strong>
+        En <strong>{{statusResolvedString.contributionYears}}</strong> años podrás retirarlo y cumplir con tu: <strong>{{formScreen1.dream}}</strong>
     </article>
     <div class="d-flex flex-column mx-auto text-center">
-        <label *ngIf="20 - statusResolved.contributionYears > 0">Te falta: <br>
+        <label *ngIf="20 - statusResolved.contributionYears > 0">Te falta aportar: <br>
             <strong class="text-danger display-6">{{20 - statusResolved.contributionYears}} años</strong> <br> Para asegurar tu futuro
         </label>
         <label *ngIf="20 - statusResolved.contributionYears == 0">

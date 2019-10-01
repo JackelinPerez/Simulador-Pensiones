@@ -1,17 +1,18 @@
 <div class="formulario d-flex flex-column mx-auto">
         <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
-            <label class="pension text-center">Para tu {{dreamOutput}}</label>
-            <label class="pension text-center">Recibirás: S/{{statusResolvedString.disbursementAmountCollected}}</label>        
+            <label class="pension text-center">Para alcanzar tu {{dreamOutput}}</label>
+            <label class="pension text-center">Ahorraste: S/{{statusResolvedString.disbursementAmountCollected}}</label>        
         </article>
         <article class="result d-flex flex-column border border-info bg-info mx-auto text-white">
-            <label class="pension text-center">Además, aseguraste tu futuro con un retiro:</label>
-            <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>
-            <label class="pension suma text-center text-danger">+</label>          
-            <label class="pension text-center">Pensión mensual vitalicia:</label>
+            <label class="pension text-center">Además,</label>
+            <label class="pension text-center">Una Pensión mensual vitalicia</label>
             <label class="pension text-center">S/ {{statusResolvedString.monthlyPensionr}}</label>
             <label class="pension suma text-center text-danger">+</label>
             <label class="pension text-center">Seguro Médico</label>
             <label class="pension text-center">De por vida</label>
+            <label class="pension suma text-center text-danger">+</label>
+            <label class="pension text-center">Un bono de retiro</label>                   
+            <label class="pension text-center">S/ {{statusResolvedString.amountCollected}}</label>          
         </article>
         <button class="button btn btn-outline-info mx-auto rounded" (click)="onSubmit()">Volver</button>
 </div>

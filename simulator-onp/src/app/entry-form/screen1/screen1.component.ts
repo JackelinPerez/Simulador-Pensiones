@@ -34,14 +34,17 @@ export class Screen1Component implements OnInit {
   }
 
   ngOnInit() {
-    // this.simulatorService.currentForm.subscribe((result :FormScreen1)=>{
-    //   console.log(''+result.name);
-    // })
   }
 
   onSubmit(customerData:any) {
-    this.simulatorService.changeScreen1({...customerData});
-    this.router.navigateByUrl('/pantalla_2');
+    
+    if (customerData.dream.indexOf(' ')!== -1) {
+      alert('Por favor describir tu meta en Una palabra')
+    }
+    else{
+      this.simulatorService.changeScreen1({...customerData});
+      this.router.navigateByUrl('/pantalla_2');
+    }
   }
 
 }
